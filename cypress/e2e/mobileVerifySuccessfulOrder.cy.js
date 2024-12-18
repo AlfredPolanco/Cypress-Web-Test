@@ -14,7 +14,7 @@ const signUpPage = new SignUpPage();
 const checkoutPage = new CheckoutPage();
 const paymentPage = new PaymentPage();
 
-describe('Web Automation', function () {
+describe('Mobile Automation', function () {
 	beforeEach(function () {
 		cy.viewport(390, 844);
 		cy.visit(Cypress.env('baseURL'));

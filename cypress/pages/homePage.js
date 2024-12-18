@@ -1,5 +1,6 @@
 // HomePage.js
 class HomePage {
+	// Define locators
 	constructor() {
 		this.welcomeHeader = '#slider-carousel';
 		this.viewProduct =
@@ -10,6 +11,7 @@ class HomePage {
 		this.contactUsHeader = '.nav > :nth-child(9)';
 	}
 
+	// Define actions
 	verifyWelcomeHeader() {
 		cy.url().should('eq', Cypress.env('baseURL'));
 	}

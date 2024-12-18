@@ -3,7 +3,7 @@ import { mockData } from '../support/user-data';
 
 class SignUpPage {
 	constructor() {
-		// Locators
+		// Define locators
 		this.genderOption = '#id_gender1';
 		this.passwordInput = '[data-qa="password"]';
 		this.birthDaySelect = '[data-qa="days"]';
@@ -20,6 +20,7 @@ class SignUpPage {
 		this.createAccountButton = '[data-qa="create-account"]';
 	}
 
+	// Define actions
 	fillSignUpForm() {
 		cy.get(this.genderOption).click();
 		cy.get(this.passwordInput).type(mockData.testData.password);
