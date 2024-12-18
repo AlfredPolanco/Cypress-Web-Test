@@ -1,58 +1,53 @@
-import { fillSignUpForm } from '../pagesObjects/actions/sign-up-page-actions';
-import { fillPaymentForm } from '../pagesObjects/actions/payment-page-actions';
-import { clickOnProceedToCheckoutButton } from '../pagesObjects/actions/cart-page-actions';
-import { placeOrder } from '../pagesObjects/actions/checkout-page-actions';
-import { clickOnContinueButton } from '../pagesObjects/actions/common-page-actions';
-import { fillAndSubmitContactUsForm } from '../pagesObjects/actions/contact-us-page-actions';
-import {
-  fillLoginForm,
-  typeSignUpForm
-} from '../pagesObjects/actions/login-page-actions';
-import {
-  addQuantity,
-  clickOnAddToCartButton,
-  addProductToCart
-} from '../pagesObjects/actions/product-page-actions';
-import {
-  navigateToHalfWayPage,
-  clickOnViewProduct,
-  clickOnSignUpLoginHeader,
-  clickOnCartHeader,
-  clickOnContactUSHeader
-} from '../pagesObjects/actions/home-page-actions';
+const HomePage = require('../pages/homePage');
+const CartPage = require('../pages/cartPage');
+const CheckoutPage = require('../pages/checkoutPage');
+const LoginPage = require('../pages/loginPage');
+const PaymentPage = require('../pages/paymentPage');
+const ProductPage = require('../pages/productPage');
+const SignUpPage = require('../pages/signUpPage');
 
 describe('Web Automation', function () {
-  beforeEach(function () {
-    cy.viewport(390, 844)
-    cy.visit(Cypress.env('baseURL'));
-    cy.url().should('eq', Cypress.env('baseURL'));
-  });
+	beforeEach(function () {
+		cy.viewport(390, 844);
+		cy.visit(Cypress.env('baseURL'));
+		cy.url().should('eq', Cypress.env('baseURL'));
+	});
 
-  it('TC-01 -  Navigate and Add Product to Cart', function () {
-    navigateToHalfWayPage();
-    clickOnViewProduct();
-    addQuantity();
-    clickOnAddToCartButton();
-  });
+	it('TC-01 -  TC01 - Verify Successful Order - Mobile', function () {
+		const homePage = new HomePage();
 
-  it('TC-02 - Checkout Process', function () {
-    clickOnSignUpLoginHeader();
-    typeSignUpForm();
-    fillSignUpForm();
-    addProductToCart();
-    clickOnCartHeader();
-    clickOnProceedToCheckoutButton();
-    placeOrder();
-    fillPaymentForm();
-    clickOnContinueButton();
-    clickOnSignUpLoginHeader();
-  });
+		//Verify Welcome page & Click on Products Page
+		homePage.verifyWelcomeHeader();
+		homePage.clickProductHeader();
 
-  it('TC-03 - User Authentication and Contact Form', function () {
-    clickOnSignUpLoginHeader();
-    fillLoginForm();
-    clickOnContactUSHeader();
-    fillAndSubmitContactUsForm();
-    clickOnSignUpLoginHeader();
-  });
+		// Verify Products page & choose 3rd product from the list
+		const productPage = new ProductPage();
+		productPage.verifyProductPage();
+		productPage.clickOnThirdProduct();
+		productPage.verifyProductDetails();
+		productPage.addQuantityAndProductToCart();
+
+		//Proceed to Checkout and complete the Register flow
+		const cartPage = new CartPage();
+		cartPage.clickOnProceedToCheckoutButton();
+		cartPage.clickOnRegisterLoginButton();
+
+		const loginPage = new LoginPage();
+		loginPage.typeSignUpForm();
+
+		const signUpPage = new SignUpPage();
+		signUpPage.fillSignUpForm();
+
+		//Proceed to the cart and conform the order
+		homePage.clickCartHeader();
+		cartPage.clickOnProceedToCheckoutButton();
+		const checkoutPage = new CheckoutPage();
+		checkoutPage.placeOrder();
+
+		const paymentPage = new PaymentPage();
+		paymentPage.fillPaymentForm();
+
+		//Logout
+		homePage.clickSignUpLoginHeader();
+	});
 });
