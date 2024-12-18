@@ -4,7 +4,7 @@
   "description": "Web automation project using Cypress",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress run --browser chrome",
+    "tests": "npx cypress run --browser chrome",
     "format": "prettier --write 'cypress/**/*.js'",
     "check-format": "prettier --check 'cypress/**/*.js'",
     "lighthouse-desktop": "lighthouse https://automationexercise.com/ --preset=desktop --output-path ./reports/lighthouse-desktop-report.html --view",
@@ -29,7 +29,7 @@
   "homepage": "https://github.com/AlfredPolanco/web-automation-cypress#readme",
   "devDependencies": {
     "@faker-js/faker": "^9.3.0",
-    "cypress": "^13.8.1",
+    "cypress": "^13.17.0",
     "cypress-mochawesome-reporter": "^3.8.2",
     "prettier": "3.4.2"
   }

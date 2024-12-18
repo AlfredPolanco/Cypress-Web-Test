@@ -6,6 +6,14 @@ const PaymentPage = require('../pages/paymentPage');
 const ProductPage = require('../pages/productPage');
 const SignUpPage = require('../pages/signUpPage');
 
+const homePage = new HomePage();
+const productPage = new ProductPage();
+const cartPage = new CartPage();
+const loginPage = new LoginPage();
+const signUpPage = new SignUpPage();
+const checkoutPage = new CheckoutPage();
+const paymentPage = new PaymentPage();
+
 describe('Web Automation', function () {
 	beforeEach(function () {
 		cy.viewport(390, 844);
@@ -13,38 +21,27 @@ describe('Web Automation', function () {
 		cy.url().should('eq', Cypress.env('baseURL'));
 	});
 
-	it('TC-01 -  TC01 - Verify Successful Order - Mobile', function () {
-		const homePage = new HomePage();
-
+	it('TC-02 - Verify Successful Order - Mobile', function () {
 		//Verify Welcome page & Click on Products Page
 		homePage.verifyWelcomeHeader();
 		homePage.clickProductHeader();
 
 		// Verify Products page & choose 3rd product from the list
-		const productPage = new ProductPage();
 		productPage.verifyProductPage();
 		productPage.clickOnThirdProduct();
 		productPage.verifyProductDetails();
 		productPage.addQuantityAndProductToCart();
 
 		//Proceed to Checkout and complete the Register flow
-		const cartPage = new CartPage();
 		cartPage.clickOnProceedToCheckoutButton();
 		cartPage.clickOnRegisterLoginButton();
-
-		const loginPage = new LoginPage();
 		loginPage.typeSignUpForm();
-
-		const signUpPage = new SignUpPage();
 		signUpPage.fillSignUpForm();
 
 		//Proceed to the cart and conform the order
 		homePage.clickCartHeader();
 		cartPage.clickOnProceedToCheckoutButton();
-		const checkoutPage = new CheckoutPage();
 		checkoutPage.placeOrder();
-
-		const paymentPage = new PaymentPage();
 		paymentPage.fillPaymentForm();
 
 		//Logout
