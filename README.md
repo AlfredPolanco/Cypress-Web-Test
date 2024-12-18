@@ -28,6 +28,11 @@ git clone https://github.com/AlfredPolanco/web-automation-cypress
 npm i
 ```
 
+3. Install Lighthouse globally
+```
+npm install -g lighthouse
+```
+
 ## Usage
 
 - To run Cypress tests using GUI just run the following command.
