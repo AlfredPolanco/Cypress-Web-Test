@@ -1,0 +1,36 @@
+{
+  "name": "web-automation-cypress",
+  "version": "1.0.0",
+  "description": "Web automation project using Cypress",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run --browser chrome",
+    "format": "prettier --write 'cypress/**/*.js'",
+    "check-format": "prettier --check 'cypress/**/*.js'",
+    "lighthouse-desktop": "lighthouse https://automationexercise.com/ --preset=desktop --output-path ./reports/lighthouse-desktop-report.html --view",
+    "lighthouse-mobile": "lighthouse https://automationexercise.com/ --output html --output-path ./reports/lighthouse-mobile-report.html --view"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlfredPolanco/web-automation-cypress.git"
+  },
+  "keywords": [
+    "QA",
+    "Cypress",
+    "Automation",
+    "CircleCI",
+    "Test"
+  ],
+  "author": "Alfredo Polanco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlfredPolanco/web-automation-cypress/issues"
+  },
+  "homepage": "https://github.com/AlfredPolanco/web-automation-cypress#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^9.3.0",
+    "cypress": "^13.8.1",
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "prettier": "3.4.2"
+  }
+}
